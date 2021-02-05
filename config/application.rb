@@ -10,6 +10,13 @@ module Mcommu
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.generators do |g|
+      g.template_engine :slim
+      g.helper false      # ヘルパーを生成しない
+      g.assets false      # CSS, JavaScript ファイルを生成しない
+      g.skip_routes true  # config/routes.rb を変更しない
+      g.test false
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
