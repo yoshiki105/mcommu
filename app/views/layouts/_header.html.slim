@@ -1,0 +1,7 @@
+header
+  nav.navbar.fixed-top.navbar-dark.bg-dark
+    = link_to 'Mcommu', root_path, class: 'navbar-brand', id: 'logo'
+    .d-flex.justify-content-end.align-self-end
+      li = link_to 'Home', root_path
+      li = link_to 'Help', help_path
+      li = link_to 'Log in', '#'
