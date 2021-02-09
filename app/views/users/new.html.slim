@@ -1,3 +1,29 @@
 - provide(:title, 'Sign up')
-h1 Sign up
-p This will be a signup page for new users.
+
+.row
+  .col-sm-9.col-md-7.col-lg-5.mx-auto
+    .card.card-signin.my-5
+      .card-body
+        h5.card-title.text-center Sign Up
+        = form_with(model: @user, local: true, class: 'form-signin') do |f|
+          = render 'shared/error_messages'
+          .form-label-group
+            = f.text_field :name, class: 'form-control', placeholder: 'Account name', required: '', autofocus: ''
+            = f.label :name, 'Account name'
+          .form-label-group
+            = f.email_field :email, class: 'form-control', placeholder: 'Email address', required: ''
+            = f.label :email, 'Email address'
+          .form-label-group
+            = f.password_field :password, class: 'form-control', placeholder: 'Password', required: ''
+            = f.label :password, 'Password'
+          .form-label-group
+            = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirmation', required: ''
+            = f.label :password_confirmation, 'Confirmation'
+          = f.button 'Create my account', class: 'btn btn-lg btn-primary btn-block text-uppercase'
+          hr.my-4/
+          = f.button class: 'btn btn-lg btn-google btn-block text-uppercase' do
+            i.fab.fa-google.mr-2
+            | Sign up with Google
+          = f.button class: 'btn btn-lg btn-facebook btn-block text-uppercase' do
+            i.fab.fa-facebook-f.mr-2
+            | Sign up with Facebook
