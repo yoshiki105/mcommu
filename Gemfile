@@ -12,6 +12,9 @@ gem 'bootsnap',   '1.4.5', require: false
 
 gem 'slim-rails'
 gem 'html2slim'
+gem 'faker'
+gem 'rails-i18n'
+gem 'kaminari'
 
 group :development, :test do
   gem 'sqlite3', '1.4.1'

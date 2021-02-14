@@ -1,0 +1,12 @@
+- provide(:title, 'Edit profile')
+- provide(:form_type, 'edit')
+
+.row
+  .col-sm-9.col-md-7.col-lg-5.mx-auto
+    .card.card-signin.my-5
+      .card-body
+        h5.card-title.text-center Edit your profile
+        .gravatar_edit.container.mb-4
+          = gravatar_for @user, htmlclass: 'mr-3 rounded-circle'
+          = link_to 'change image', 'https://gravatar.com/emails', class: 'btn btn-secondary', target: '_blank', rel: 'noopener'
+        = render 'form'

@@ -1,0 +1,6 @@
+li.d-flex
+  = gravatar_for user, size: 50
+  = link_to user.name, user, class: 'text-dark ml-3'
+  - if current_user.admin? && !current_user?(user)
+    = link_to 'delete', user, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'ml-auto text-danger'
+.border-bottom.border-light.mt-1.mb-4

@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
       else
         forget(@user)
       end
-      redirect_to @user, flash: { success: 'おかえりなさい。ログインに成功しました！' }
+      flash[:success] = 'おかえりなさい。ログインに成功しました！'
+      redirect_back_or @user
     else
       flash.now[:danger] = 'メールアドレスとパスワードの組み合わせが間違っています'
       render :new

@@ -1,6 +1,6 @@
 - provide(:title, @user.name)
 
 .media.d-flex.align-items-center
-  = gravatar_for @user, size: 60, htmlclass: 'rounded-circle'
+  = gravatar_for @user
   .media-body
     h3.ml-2 = @user.name
