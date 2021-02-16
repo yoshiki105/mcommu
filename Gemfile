@@ -15,6 +15,10 @@ gem 'html2slim'
 gem 'faker'
 gem 'rails-i18n'
 gem 'kaminari'
+gem 'active_storage_validations'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'aws-sdk-s3', require: false
 
 group :development, :test do
   gem 'sqlite3', '1.4.1'

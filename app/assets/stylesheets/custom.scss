@@ -61,17 +61,34 @@ p {
   line-height: 1.7em;
 }
 
-a {
+a:hover {
   text-decoration: none;
-  color: white;
-  &:hover {
-    text-decoration: none;
+}
+
+header {
+  a {
+    color: white;
+    &:hover {
+      color: white;
+      padding: .3rem;
+      margin: 0 -0.3rem;
+      background-color: darkgray;
+      border-radius: .25rem;
+      transition:0.7s;
+    }
   }
+
 }
 
 li {
   list-style-type: none;
   margin: 0 10px;
+}
+
+.media-body {
+  p.text-secondary {
+    font-size: 0.7rem;
+  }
 }
 
 

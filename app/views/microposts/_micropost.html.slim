@@ -1,0 +1,22 @@
+li.list-group-item.rounded-lg.pb-0.my-2 id="micropost-#{micropost.id}"
+  .media
+    = link_to gravatar_for(micropost.user), micropost.user, class: 'bd-placeholder-img align-self-start mr-3'
+    .media-body
+      .d-flex
+        h5.mt-0 = link_to micropost.user.name, micropost.user
+        p.text-secondary.ml-auto.mb-1
+          | #{time_ago_in_words(micropost.created_at)}前の投稿
+          - if current_user?(micropost.user)
+            |  | #{link_to 'delete', micropost, method: :delete, data: { confirm: 'You sure?' }}
+      p = micropost.content
+      = image_tag(micropost.display_image) if micropost.image.attached?
+
+javascript:
+  $("#micropost_image").bind("change", function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert("画像サイズが5MBを超えています。サイズの小さな画像を選び直してください。");
+      $("#micropost_image").val("");
+    }
+  });
+

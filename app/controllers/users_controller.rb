@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.page(params[:page]).per(10)
   end
 
   def new
@@ -45,16 +46,11 @@ class UsersController < ApplicationController
 
   # ストロングパラメータ
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    require_params = %i[name email password password_confirmation]
+    params.require(:user).permit(require_params)
   end
 
   # beforeアクション
-  def logged_in_user
-    unless logged_in?
-      store_location
-      redirect_to login_url, flash: { danger: 'Please log in.' }
-    end
-  end
 
   # 正しいユーザーかどうか確認
   def correct_user

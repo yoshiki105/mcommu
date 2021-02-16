@@ -1,12 +1,7 @@
-.center.jumbotron
-  h1 Welcome to the Mcommu
-
-  h2
-    | This is the home page for the
-    a href="https://railstutorial.jp/"  Ruby on Rails Tutorial
-    |  sample application.
-
-  = link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary'
+- if logged_in?
+  = render 'shared/micropost_home'
+- else
+  = render 'welcome'
 
 = link_to image_tag('rails.svg', alt: 'Rails logl', width: '200px'),
                     'https://rubyonrails.org/'

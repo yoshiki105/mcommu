@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # 関連付け
+  has_many :microposts, dependent: :destroy
+
   # 属性
   attr_accessor :remember_token
 
@@ -47,5 +50,10 @@ class User < ApplicationRecord
   # ユーザーのログイン情報を破棄する
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # ユーザーのフィードを取得する
+  def feed
+    Micropost.where('user_id = ?', id)
   end
 end
