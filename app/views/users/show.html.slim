@@ -2,11 +2,15 @@
 
 .row
   .col-md-4
-    h3
-      = @user.name
-      = gravatar_for @user
+    section.user_info
+      h3
+        = @user.name
+        = gravatar_for @user
+    section.stats
+      = render 'shared/stats'
 
   .col-md-8.my-3
+    = render 'follow_form' if logged_in?
     - if @user.microposts.any?
       h3 Microposts (#{@user.microposts.count})
       ol.list-group.my-3

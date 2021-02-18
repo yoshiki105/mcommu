@@ -9,8 +9,7 @@ class Micropost < ApplicationRecord
   # バリデーション
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
-  validates :image, content_type: { in: %i[png jpg jpeg gif], message: '画像が無効な形式です。' },
-                    size: { less_than: 1.megabytes, message: '画像容量は5MB以下にしてください。' }
+  validates :image, content_type: %i[png jpg jpeg gif], size: { less_than: 5.megabytes }
 
   # 表示用にリサイズされた画像を返す
   def display_image

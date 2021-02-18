@@ -1,7 +1,11 @@
 .row
   aside.col-md-4
-    = render 'shared/user_info'
-    = render 'shared/micropost_form'
+    section.user_info
+      = render 'shared/user_info'
+    section.stats
+      = render 'shared/stats'
+    section.micropost_form
+      = render 'shared/micropost_form'
   .col-md-8
     h3 投稿一覧
     = render 'shared/feed'
