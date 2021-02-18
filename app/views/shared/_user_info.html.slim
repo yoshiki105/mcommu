@@ -1,4 +1,12 @@
-= link_to gravatar_for(current_user), current_user
-h1 = current_user.name
-= link_to 'view my profile', current_user
-= pluralize(current_user.microposts.count, 'micropost', locale: :en)
+- @user ||= current_user
+
+.card
+  = gravatar_for @user, htmlclass: 'bd-placeholder-img card-img-top'
+  .card-body
+    .card-title.mb-3
+      h3 = @user.name
+    .mb-2
+      | 投稿数：#{@user.microposts.count}
+    .mb-2
+      = render 'shared/stats'
+    = render 'users/follow_form' if logged_in?

@@ -1,6 +1,8 @@
 = form_with(model: @micropost, local: true) do |f|
   = render 'shared/error_messages', object: f.object
-  .field
-    = f.text_area :content, placeholder: 'Compose new micropost...'
-    = f.file_field :image, accept: 'image/jpeg,image/gif,image/png'
-  = f.submit 'Post', class: 'btn btn-primary'
+  .form-group
+    = f.text_area :content, class: 'form-control', rows: 3, placeholder: '新しく投稿してみる...？'
+  .form-group
+    = f.file_field :image, class: 'form-control-file', accept: 'image/jpeg,image/gif,image/png'
+  .form-group
+    = f.submit '投稿する！', class: 'btn btn-primary'

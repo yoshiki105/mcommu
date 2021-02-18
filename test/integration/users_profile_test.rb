@@ -10,7 +10,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
     assert_select 'title', full_title(@user.name)
     assert_select 'h3', text: @user.name
-    assert_select 'h3>img.gravatar'
+    assert_select 'img.gravatar'
     assert_match @user.microposts.count.to_s, response.body
     assert_select 'ul.pagination', count: 1
     @user.microposts.take(10).each do |micropost|

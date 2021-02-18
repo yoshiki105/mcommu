@@ -1,18 +1,13 @@
 - provide(:title, @user.name)
 
 .row
-  .col-md-4
-    section.user_info
-      h3
-        = @user.name
-        = gravatar_for @user
-    section.stats
-      = render 'shared/stats'
+  .col-lg-4.d-flex.flex-column.align-items-center.user-profile
+    = render 'shared/user_info'
 
-  .col-md-8.my-3
-    = render 'follow_form' if logged_in?
+
+  .offset-lg-4.col-lg-8.mt-5.mb-3
     - if @user.microposts.any?
-      h3 Microposts (#{@user.microposts.count})
+      h3.text-center.mb-3 #{@user.name}さんの投稿 (#{@user.microposts.count})
       ol.list-group.my-3
         = render @microposts
       = paginate @microposts

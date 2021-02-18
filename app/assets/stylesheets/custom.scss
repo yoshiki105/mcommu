@@ -172,3 +172,14 @@ footer {
 //   height: auto !important;
 // }
 
+
+/* user_profile */
+@media(min-width: 992px){
+  .user-profile{
+    margin-top: -700px;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 150px;
+    left: 5%;
+  }
+}
