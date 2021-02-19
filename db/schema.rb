@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_045732) do
+ActiveRecord::Schema.define(version: 2021_02_19_001422) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 2021_02_16_045732) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "spots", force: :cascade do |t|
+    t.string "place"
+    t.string "dimension"
+    t.text "memo"
+    t.integer "points"
+    t.integer "world_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["world_id"], name: "index_spots_on_world_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -63,6 +74,14 @@ ActiveRecord::Schema.define(version: 2021_02_16_045732) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "worlds", force: :cascade do |t|
+    t.string "name"
+    t.integer "seed", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "microposts", "users"
+  add_foreign_key "spots", "worlds"
 end
