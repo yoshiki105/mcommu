@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_001422) do
+ActiveRecord::Schema.define(version: 2021_02_19_003659) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 2021_02_19_001422) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "joins", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "world_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "world_id"], name: "index_joins_on_user_id_and_world_id", unique: true
+    t.index ["user_id"], name: "index_joins_on_user_id"
+    t.index ["world_id"], name: "index_joins_on_world_id"
   end
 
   create_table "microposts", force: :cascade do |t|
@@ -82,6 +92,8 @@ ActiveRecord::Schema.define(version: 2021_02_19_001422) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "joins", "users"
+  add_foreign_key "joins", "worlds"
   add_foreign_key "microposts", "users"
   add_foreign_key "spots", "worlds"
 end
