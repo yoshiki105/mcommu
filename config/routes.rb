@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   end
   resources :microposts, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
+  resources :worlds
+  resources :spots, only: %i[edit update create destroy]
 end

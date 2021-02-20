@@ -1,0 +1,35 @@
+- provide(:title, '座標編集')
+
+h1 #{@spot.world.name}の座標編集
+
+.table-responsive
+  table.table
+    thead align='center'
+      tr.table-primary
+        th width='350px' 場所名
+        th width='14%' ディメンション
+        th width='8%' X
+        th width='8%' Y
+        th width='8%' Z
+        th メモ
+        th width='8%' 操作
+    tbody
+      tr
+        = form_with(model: @spot, local: true) do |f|
+          = render 'shared/error_messages', object: f.object
+          .form-row
+            th = f.text_field :place, class: 'form-control', required: ''
+            th
+              .form-check align='left'
+                = f.radio_button :dimension, :overworld, class: 'form-check-input', required: ''
+                = f.label :dimension,'overworld', value: :overworld, class: 'form-check-label'
+              .form-check align='left'
+                = f.radio_button :dimension, :nether, class: 'form-check-input', required: ''
+                = f.label :dimension,'nether', value: :nether, class: 'form-check-label'
+            th = f.text_field :point_x, class: 'form-control'
+            th = f.text_field :point_y, class: 'form-control'
+            th = f.text_field :point_z, class: 'form-control'
+            th = f.text_field :memo, class: 'form-control'
+            th = f.button '更新！', class: 'btn btn-sm btn-primary ml-auto mb-1'
+
+= link_to '座標情報を削除する', spot_path(@spot), method: :delete, class: 'btn btn-danger', data: {confirm: '座標情報を削除します。本当によろしいですか？'}

@@ -1,0 +1,5 @@
+li.d-flex
+  = link_to world.name, world, class: 'text-dark ml-3'
+  / - if worldの管理者なら削除を表示
+  = link_to 'delete', world, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'ml-auto text-danger'
+.border-bottom.border-light.mt-1.mb-4

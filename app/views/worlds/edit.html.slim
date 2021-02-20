@@ -1,0 +1,17 @@
+- provide(:title, 'World Edit')
+
+h1 = yield(:title)
+
+.row.justify-content-center
+  .col-8
+    = form_with(model: @world, local: true) do |f|
+      = render 'shared/error_messages', object: f.object
+      .form-label-group
+        = f.text_field :name, class: 'form-control', placeholder: 'World name', required: '', autofocus: ''
+        = f.label :name, 'World name'
+
+      .form-label-group
+        = f.number_field :seed, class: 'form-control', placeholder: 'Seed', required: ''
+        = f.label :seed, 'Seed'
+
+      = f.button 'ワールド情報を更新する', class: 'btn btn-lg btn-primary btn-block text-uppercase'

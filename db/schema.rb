@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_003659) do
+ActiveRecord::Schema.define(version: 2021_02_19_013631) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -66,10 +66,12 @@ ActiveRecord::Schema.define(version: 2021_02_19_003659) do
     t.string "place"
     t.string "dimension"
     t.text "memo"
-    t.integer "points"
     t.integer "world_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "point_x"
+    t.integer "point_y"
+    t.integer "point_z"
     t.index ["world_id"], name: "index_spots_on_world_id"
   end
 

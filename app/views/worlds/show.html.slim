@@ -1,0 +1,137 @@
+- provide(:title, @world.name)
+
+main
+  .container-fluid
+    h1.mt-4 = @world.name
+    / ol.breadcrumb.mb-4
+      li.breadcrumb-item
+        a href="index.html"  Dashboard
+      li.breadcrumb-item.active Charts
+    / .card.mb-4
+      .card-body
+        | Chart.js is a third party plugin that is used to generate the charts in this template. The charts below have been customized - for further customization options, please visit the official
+        a href="https://www.chartjs.org/docs/latest/" target="_blank"  Chart.js documentation
+        | \.
+    .row
+      .col-lg-6
+        .card.mb-4
+          .card-header
+            i.fas.fa-chart-bar.mr-1
+            | 参加者一覧
+          .card-body
+            canvas#myBarChart height="50" width="100%"
+          .card-footer.small.text-muted 準備中です。。。
+      .col-lg-6
+        .card.mb-4
+          .card-header
+            | ワールド情報？
+            | or
+            i.fas.fa-chart-pie.mr-1
+            | やりたい事メモ
+          .card-body.d-flex.flex-column
+            / canvas#myPieChart height="50" width="100%"
+            . ワールド名：#{@world.name}
+            . Seed値   ：#{@world.seed}
+            .ml-auto = link_to 'ワールド情報の編集', edit_world_path(@world), class: 'btn btn-warning'
+          .card-footer.small.text-muted 準備中です。。。
+    .card.mb-4
+      .card-header
+        i.fas.fa-chart-area.mr-1
+        | ワールドマップ
+      .card-body
+        canvas#myAreaChart height="30" width="100%"
+      .card-footer.small.text-muted 準備中です。。。
+    .card.mb-4
+      .card-header
+        i.fas.fa-table.mr-1
+        | ワールド座標一覧
+      .card-body
+        .table-responsive
+          table#dataTable.table.table-bordered.table-striped cellspacing="0" width="100%"
+            / caption オーバーワールド or ネザー
+            thead align='center'
+              tr.table-primary
+                th width='350px' 場所名
+                th width='14%' ディメンション
+                th width='8%' X
+                th width='8%' Y
+                th width='8%' Z
+                th メモ
+                th width='8%' 操作
+              tr.table-info
+                = form_with(model: @spot, local: true) do |f|
+                  . = hidden_field_tag :world_id, @world.id
+                  = render 'shared/error_messages', object: f.object
+                  .form-row
+                    th = f.text_field :place, class: 'form-control', required: ''
+                    th
+                      .form-check align='left'
+                        = f.radio_button :dimension, :overworld, class: 'form-check-input', required: ''
+                        = f.label :dimension,'overworld', value: :overworld, class: 'form-check-label'
+                      .form-check align='left'
+                        = f.radio_button :dimension, :nether, class: 'form-check-input', required: ''
+                        = f.label :dimension,'nether', value: :nether, class: 'form-check-label'
+                    th = f.text_field :point_x, class: 'form-control'
+                    th = f.text_field :point_y, class: 'form-control'
+                    th = f.text_field :point_z, class: 'form-control'
+                    th = f.text_field :memo, class: 'form-control'
+                    th = f.button '追加', class: 'btn btn-sm btn-primary ml-auto mb-1'
+            tbody
+              - @spots.each do |spot|
+                - if spot.valid?
+                  tr
+                    td = spot.place
+                    td align='center' = spot.dimension
+                    td align='right' = spot.point_x
+                    td align='right' = spot.point_y
+                    td align='right' = spot.point_z
+                    td = spot.memo
+                    td align='center' = link_to '編集', "/spots/#{spot.id}/edit", class: 'btn btn-sm btn-warning'
+            tfoot
+              tr.table-primary
+                th 場所名
+                th ディメンション
+                th X
+                th Y
+                th Z
+                th メモ
+                th 操作
+
+/ javascript:
+  var ctx = document.getElementById('myAreaChart');
+  var myAreaChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });

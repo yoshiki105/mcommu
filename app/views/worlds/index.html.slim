@@ -1,0 +1,8 @@
+- provide(:title, 'All worlds')
+h1 ALL WORLDS
+
+.d-flex.flex-row-reverse.my-3
+  = link_to '新規ワールドを作成する', new_world_path, class: 'btn btn-primary'
+
+ul.px-1
+  = render @worlds
