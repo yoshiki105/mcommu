@@ -1,5 +1,19 @@
 - provide(:title, @world.name)
 
+javascript:
+  function tableDisplay(dimension) {
+    if(dimension == 'overworld'){
+      $('.tr-nether').addClass('displaynone');
+      $('.tr-overworld').removeClass('displaynone');
+    }else if(dimension == 'nether'){
+      $('.tr-overworld').addClass('displaynone');
+      $('.tr-nether').removeClass('displaynone');
+    }else if(dimension == 'both'){
+      $('.tr-overworld').removeClass('displaynone');
+      $('.tr-nether').removeClass('displaynone');
+    }
+  }
+
 main
   .container-fluid
     h1.mt-4 = @world.name
@@ -46,6 +60,18 @@ main
         i.fas.fa-table.mr-1
         | ワールド座標一覧
       .card-body
+        .btn-group.btn-group-toggle.mb-3 data-toggle="buttons"
+          label.btn.btn-outline-primary
+            input autocomplete="off" name="options" type="radio" onclick="tableDisplay('overworld');"
+            | オーバーワールド
+          label.btn.btn-outline-danger
+            input autocomplete="off" name="options" type="radio" onclick="tableDisplay('nether');"
+            | ネザー
+          label.btn.btn-outline-secondary.active
+            input autocomplete="off" checked="checked" name="options" type="radio" onclick="tableDisplay('both');"
+            | 両方
+        small.ml-1.font-italic ⬅︎ 絞り込もう！
+
         .table-responsive
           table#dataTable.table.table-bordered.table-striped cellspacing="0" width="100%"
             / caption オーバーワールド or ネザー
@@ -79,7 +105,7 @@ main
             tbody
               - @spots.each do |spot|
                 - if spot.valid?
-                  tr
+                  tr class=("tr-#{spot.dimension}")
                     td = spot.place
                     td align='center' = spot.dimension
                     td align='right' = spot.point_x
