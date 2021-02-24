@@ -4,6 +4,6 @@ class Spot < ApplicationRecord
 
   # バリデーション
   validates :place, presence: true, length: { maximum: 20 }
-  validates :dimension, presence: true, inclusion: { in: %w[overworld nether] }
+  validates :dimension, presence: true, inclusion: { in: %w[overworld nether end] }
   validates :memo, length: { maximum: 144 }
 end

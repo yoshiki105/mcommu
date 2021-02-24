@@ -5,12 +5,19 @@ javascript:
     if(dimension == 'overworld'){
       $('.tr-nether').addClass('displaynone');
       $('.tr-overworld').removeClass('displaynone');
+      $('.tr-end').addClass('displaynone');
     }else if(dimension == 'nether'){
       $('.tr-overworld').addClass('displaynone');
       $('.tr-nether').removeClass('displaynone');
-    }else if(dimension == 'both'){
+      $('.tr-end').addClass('displaynone');
+    }else if(dimension == 'end'){
+      $('.tr-overworld').addClass('displaynone');
+      $('.tr-nether').addClass('displaynone');
+      $('.tr-end').removeClass('displaynone');
+    }else if(dimension == 'all'){
       $('.tr-overworld').removeClass('displaynone');
       $('.tr-nether').removeClass('displaynone');
+      $('.tr-end').removeClass('displaynone');
     }
   }
 
@@ -67,9 +74,12 @@ main
           label.btn.btn-outline-danger
             input autocomplete="off" name="options" type="radio" onclick="tableDisplay('nether');"
             | ネザー
+          label.btn.btn-outline-warning
+            input autocomplete="off" name="options" type="radio" onclick="tableDisplay('end');"
+            | エンド
           label.btn.btn-outline-secondary.active
-            input autocomplete="off" checked="checked" name="options" type="radio" onclick="tableDisplay('both');"
-            | 両方
+            input autocomplete="off" checked="checked" name="options" type="radio" onclick="tableDisplay('all');"
+            | 全部
         small.ml-1.font-italic ⬅︎ 絞り込もう！
 
         .table-responsive
@@ -77,13 +87,13 @@ main
             / caption オーバーワールド or ネザー
             thead align='center'
               tr.table-primary
-                th width='350px' 場所名
-                th width='14%' ディメンション
-                th width='8%' X
-                th width='8%' Y
-                th width='8%' Z
-                th メモ
-                th width='8%' 操作
+                th.place width='350px' 場所名
+                th.dimension width='14%' ディメンション
+                th.point width='8%' X
+                th.point width='8%' Y
+                th.point width='8%' Z
+                th.memo メモ
+                th.button width='8%' 操作
               tr.table-info
                 = form_with(model: @spot, local: true) do |f|
                   . = hidden_field_tag :world_id, @world.id
@@ -97,6 +107,9 @@ main
                       .form-check align='left'
                         = f.radio_button :dimension, :nether, class: 'form-check-input', required: ''
                         = f.label :dimension,'nether', value: :nether, class: 'form-check-label'
+                      .form-check align='left'
+                        = f.radio_button :dimension, :end, class: 'form-check-input', required: ''
+                        = f.label :dimension,'end', value: :end, class: 'form-check-label'
                     th = f.text_field :point_x, class: 'form-control'
                     th = f.text_field :point_y, class: 'form-control'
                     th = f.text_field :point_z, class: 'form-control'
