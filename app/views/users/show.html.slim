@@ -1,15 +1,15 @@
 - provide(:title, @user.name)
 
-.row
+.row.row-micropost
   .col-lg-4.d-flex.flex-column.align-items-center.user-profile
     = render 'shared/user_info'
 
 
-  .offset-lg-4.col-lg-8.mt-5.mb-3
+  .offset-lg-4.col-lg-8.mt-5.mb-3.user-microposts
     - if @user.microposts.any?
       h3.text-center.mb-3 #{@user.name}さんの投稿 (#{@user.microposts.count})
       ol.list-group.my-3
         = render @microposts
       = paginate @microposts
     - else
-      | 投稿はまだありません。
+      h3.text-center.mt-5 投稿はまだありません。

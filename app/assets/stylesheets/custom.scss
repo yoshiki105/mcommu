@@ -183,10 +183,23 @@ footer {
 /* user_profile */
 @media(min-width: 992px){
   .user-profile{
-    margin-top: -700px;
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 150px;
     left: 5%;
   }
+  .user-microposts{
+    position: relative;
+    top: -500px;
+  }
+  .home-microposts{
+    position: relative;
+    top: -600px;
+  }
+  .row-micropost{
+    max-height: 1500px;
+  }
 }
+// .user-profile{
+//   margin-top: -700px;
+// }

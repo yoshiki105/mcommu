@@ -3,3 +3,10 @@
     / @feed_itemsはMicropostクラスを持っているので、Railsはapp/views/microposts/_micropost.html.erbを探しに行ける。
     = render @feed_items
   = paginate @feed_items, params: { controller: :static_pages, action: :home }
+- else
+  .text-center.mt-5.bg-light
+    | まだ誰のこともフォローしていないようです。
+    br
+    | 気になるユーザーをフォローしてみませんか？
+    br
+    = link_to '他のユーザーのつぶやきを見に行く！', users_path
